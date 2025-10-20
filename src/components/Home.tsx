@@ -1,8 +1,56 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 function Home() {
+  const [data, setData]= useState([])
+  useEffect(()=>{
+    axios.get('http://localhost:3000/users')
+    .then(res=> {
+      console.log(res.data)
+      setData(res.data)
+    })
+    .catch(err=> console.log(err));
+  },[])
+
   return (
-    <div>Home</div>
+    <div className='d-flex flex-column justify-content-center align-items-center bg-light pt-lg-5'>
+      <h1 className='mb-4'>List of Users</h1>
+      <div className='w-75 rounded bg-white border shadow p-4 mt-4'>
+        <div className='d-flex justify-content-end'>
+          <button className='btn btn-outline-success'>Add</button>
+        </div>
+        <table className='table table-striped'>
+          <thead>
+            <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              data.map((d,i)=>(
+              <tr key={i}>
+                  <td>{d.id}</td>
+                  <td>{d.name}</td>
+                  <td>{d.email}</td>
+                  <td>{d.phone}</td>
+                  <td>
+                    <button className='btn btn-sm btn-info me-2'>View</button>
+                    <button className='btn btn-sm btn-primary me-2'>Edit</button>
+                    <button className='btn btn-sm btn-danger'>Delete</button>
+                  </td>
+              </tr>
+            ))
+            }
+            
+          </tbody>
+          
+        </table>
+      </div>
+    </div>
   )
 }
 
