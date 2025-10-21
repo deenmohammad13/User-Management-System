@@ -9,13 +9,20 @@ function Create() {
     phone: ''
   })
   const navigate = useNavigate();
+
+   const isFormValid = values.name && values.email && values.phone;
+
   const handleSubmit = (event) =>{
     event.preventDefault();
+
+     if (!isFormValid) {
+      alert('Please fill all fields');
+      return;
+    }
      axios.post('http://localhost:3000/users', values)
     .then(res=> {
       console.log(res)
       navigate('/');
-      
     })
     .catch(err=> console.log(err));
   }
@@ -39,7 +46,7 @@ function Create() {
             <input type="text" name='phone' className='form-control' placeholder='Enter Phone'
             onChange={ e => setValues({...values, phone: e.target.value})}/>
           </div>
-          <button type='submit' className='btn btn-success'>Submit</button>
+          <button type='submit' className='btn btn-success' disabled={!isFormValid}>Submit</button>
           <Link to='/' className='btn btn-primary ms-3'>Back</Link>
         </form>
       </div>
