@@ -30,22 +30,26 @@ function Create() {
     <div className='d-flex w-100 vh-100 justify-content-center align-items-center bg-light'>
       <div className='w-50 rounded bg-white border shadow px-5 pt-3 pb-5 rounded'>
         <h1>Add a User</h1>
+
         <form onSubmit={handleSubmit}>
           <div className='mb-3'>
             <label htmlFor="name">Name:</label>
             <input type="text" name='name' className='form-control' placeholder='Enter Name'
             onChange={ e => setValues({...values, name: e.target.value})}/>
           </div>
+
           <div className='mb-3'>
             <label htmlFor="email">E-mail:</label>
             <input type="email" name='email' className='form-control' placeholder='Enter E-mail'
             onChange={ e => setValues({...values, email: e.target.value})}/>
           </div>
+
           <div className='mb-3'>
             <label htmlFor="phone">Phone:</label>
             <input type="text" name='phone' className='form-control' placeholder='Enter Phone'
             onChange={ e => setValues({...values, phone: e.target.value})}/>
           </div>
+          
           <button type='submit' className='btn btn-success' disabled={!isFormValid}>Submit</button>
           <Link to='/' className='btn btn-primary ms-3'>Back</Link>
         </form>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 interface User {
@@ -15,6 +15,16 @@ function Home() {
     .then(res=> setData(res.data))
     .catch(err=> console.log(err));
   },[])
+
+  const handleDelete = (id:string) => {
+  const confirm = window.confirm('Are you sure you want to delete this user?');
+  if (confirm) {
+    axios.delete(`http://localhost:3000/users/`+id)
+    .then(() => {
+      window.location.reload();
+    }).catch(err => console.log(err));
+}
+}
 
   return (
     <div className='d-flex flex-column justify-content-center align-items-center bg-light pt-lg-5'>
@@ -44,7 +54,7 @@ function Home() {
                   <td>
                     <Link to={`/Read/${d.id}`} className='btn btn-sm btn-info me-2'>View</Link>
                     <Link to={`/Update/${d.id}`} className='btn btn-sm btn-info me-2'>Edit</Link>
-                    <button className='btn btn-sm btn-danger'>Delete</button>
+                    <button className='btn btn-sm btn-danger' onClick={()=> handleDelete(d.id)}>Delete</button>
                   </td>
               </tr>
             ))
@@ -57,5 +67,6 @@ function Home() {
     </div>
   )
 }
+
 
 export default Home
