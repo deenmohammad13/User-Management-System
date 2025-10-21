@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function Home() {
   const [data, setData]= useState([])
@@ -17,7 +18,7 @@ function Home() {
       <h1 className='mb-4'>List of Users</h1>
       <div className='w-75 rounded bg-white border shadow p-4 mt-4'>
         <div className='d-flex justify-content-end'>
-          <button className='btn btn-outline-success'>Add</button>
+          <Link to="/Create" className='btn btn-success'>Add +</Link>
         </div>
         <table className='table table-striped'>
           <thead>
