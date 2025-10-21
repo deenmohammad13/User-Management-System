@@ -2,14 +2,17 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+}
 function Home() {
-  const [data, setData]= useState([])
+  const [data, setData]= useState<User[]>([])
   useEffect(()=>{
     axios.get('http://localhost:3000/users')
-    .then(res=> {
-      console.log(res.data)
-      setData(res.data)
-    })
+    .then(res=> setData(res.data))
     .catch(err=> console.log(err));
   },[])
 
@@ -39,7 +42,7 @@ function Home() {
                   <td>{d.email}</td>
                   <td>{d.phone}</td>
                   <td>
-                    <button className='btn btn-sm btn-info me-2'>View</button>
+                    <Link to={`/Read/${d.id}`} className='btn btn-sm btn-info me-2'>View</Link>
                     <button className='btn btn-sm btn-primary me-2'>Edit</button>
                     <button className='btn btn-sm btn-danger'>Delete</button>
                   </td>

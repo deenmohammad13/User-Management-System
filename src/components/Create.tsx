@@ -31,12 +31,12 @@ function Create() {
           </div>
           <div className='mb-3'>
             <label htmlFor="email">E-mail:</label>
-            <input type="email" name='name' className='form-control' placeholder='Enter E-mail'
+            <input type="email" name='email' className='form-control' placeholder='Enter E-mail'
             onChange={ e => setValues({...values, email: e.target.value})}/>
           </div>
           <div className='mb-3'>
             <label htmlFor="phone">Phone:</label>
-            <input type="text" name='name' className='form-control' placeholder='Enter Phone'
+            <input type="text" name='phone' className='form-control' placeholder='Enter Phone'
             onChange={ e => setValues({...values, phone: e.target.value})}/>
           </div>
           <button type='submit' className='btn btn-success'>Submit</button>
